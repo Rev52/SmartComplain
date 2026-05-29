@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, memo } from "react";
+import { useCallback, useEffect, useState, memo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { StatusBadge, PriorityBadge } from "@/component/laporan/StatusBadge";
 
@@ -23,9 +23,12 @@ interface Laporan {
   user_id: string;
   foto_url?: string[] | null;
   profiles?: ProfileRel[] | ProfileRel | null;
+  handled_by?: string | null;
+  handled_at?: string | null;
 }
 
 const PER_PAGE = 5;
+const CURRENT_YEAR = new Date().getFullYear();
 
 const HEADER_COLS = [
   "No",
@@ -47,7 +50,6 @@ const STATUS_OPTIONS = [
 ];
 
 const supabase = createClient();
-const CURRENT_YEAR = new Date().getFullYear();
 
 function formatTanggal(iso: string): string {
   return new Date(iso).toLocaleDateString("id-ID", {
@@ -90,7 +92,7 @@ function DetailLaporan({ item }: { item: Laporan }) {
     <div className="card-blue-border card-body">
       <h2 className="card-title mb-5">Detail Laporan</h2>
 
-      <div style={{ display: "flex", gap: "1.5rem" }}>
+      <div className="detail-layout">
         <div className="detail-photo">
           {item.foto_url?.[0] ? (
             <img src={item.foto_url[0]} alt="Foto laporan" />
@@ -149,6 +151,7 @@ function Pagination({
     <div className="pagination-wrap">
       <div className="pagination-btns">
         <button
+          type="button"
           className="page-btn"
           disabled={page === 1 || loading}
           onClick={() => onChangePage(page - 1)}
@@ -167,6 +170,7 @@ function Pagination({
 
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
           <button
+            type="button"
             key={p}
             onClick={() => onChangePage(p)}
             disabled={loading}
@@ -177,6 +181,7 @@ function Pagination({
         ))}
 
         <button
+          type="button"
           className="page-btn"
           disabled={page === totalPages || loading}
           onClick={() => onChangePage(page + 1)}
@@ -226,11 +231,11 @@ const LaporanRow = memo(
       >
         <td className="text-gray-500">{(page - 1) * PER_PAGE + index + 1}</td>
 
-        <td className="text-gray-600 font-mono text-xs">
+        <td className="font-mono text-xs text-gray-600">
           {getLaporanId(index, page)}
         </td>
 
-        <td className="text-gray-800 font-medium">{item.judul}</td>
+        <td className="font-medium text-gray-800">{item.judul}</td>
 
         <td className="text-gray-600">{item.kategori}</td>
 
@@ -297,23 +302,25 @@ export default function AdminLaporanPage() {
         .from("laporan")
         .select(
           `
-          id,
-          judul,
-          kategori,
-          status,
-          prioritas,
-          lokasi,
-          deskripsi,
-          kecamatan,
-          created_at,
-          user_id,
-          foto_url,
-          profiles (
-            full_name,
-            email,
-            phone
-          )
-        `,
+  id,
+  judul,
+  kategori,
+  status,
+  prioritas,
+  lokasi,
+  deskripsi,
+  kecamatan,
+  created_at,
+  user_id,
+  foto_url,
+  handled_by,
+  handled_at,
+  profiles (
+    full_name,
+    email,
+    phone
+  )
+`,
           { count: "exact" }
         )
         .order("created_at", { ascending: false })
@@ -348,9 +355,22 @@ export default function AdminLaporanPage() {
   }, [page, debouncedSearch]);
 
   const updateStatus = useCallback(async (id: string, status: string) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      console.error("User admin tidak ditemukan.");
+      return;
+    }
+
     const { error } = await supabase
       .from("laporan")
-      .update({ status })
+      .update({
+        status,
+        handled_by: user.id,
+        handled_at: new Date().toISOString(),
+      })
       .eq("id", id);
 
     if (error) {
@@ -359,10 +379,28 @@ export default function AdminLaporanPage() {
     }
 
     setLaporan((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, status } : item))
+      prev.map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            status,
+            handled_by: user.id,
+            handled_at: new Date().toISOString(),
+          }
+          : item
+      )
     );
 
-    setSelected((prev) => (prev?.id === id ? { ...prev, status } : prev));
+    setSelected((prev) =>
+      prev?.id === id
+        ? {
+          ...prev,
+          status,
+          handled_by: user.id,
+          handled_at: new Date().toISOString(),
+        }
+        : prev
+    );
   }, []);
 
   const handleSelect = useCallback((item: Laporan) => {
@@ -372,133 +410,123 @@ export default function AdminLaporanPage() {
   const totalPages = Math.max(1, Math.ceil(totalItems / PER_PAGE));
 
   return (
-    <div className="admin-shell">
-      <div className="admin-page">
-        <div className="card-blue-border">
-          <div className="card-header">
-            <div>
-              <h1 className="card-title">Daftar Laporan</h1>
-              <p className="page-subtitle">
-                Kelola dan pantau semua laporan yang masuk.
-              </p>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-              }}
-            >
-              <div className="search-wrap">
-                <svg
-                  className="search-icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-
-                <input
-                  type="text"
-                  placeholder="Cari laporan..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="search-input"
-                />
-              </div>
-
-              <button className="btn--icon">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                </svg>
-              </button>
-            </div>
+    <div className="admin-page">
+      <div className="card-blue-border">
+        <div className="card-header card-header--responsive">
+          <div>
+            <h1 className="card-title">Daftar Laporan</h1>
+            <p className="page-subtitle">
+              Kelola dan pantau semua laporan yang masuk.
+            </p>
           </div>
 
-          <div className="px-6">
-            <table className="report-table w-full text-sm">
-              <thead>
-                <tr>
-                  {HEADER_COLS.map((header) => (
-                    <th key={header}>{header}</th>
-                  ))}
-                </tr>
-              </thead>
+          <div className="admin-toolbar">
+            <div className="search-wrap">
+              <svg
+                className="search-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
 
-              <tbody>
-                {loading ? (
-                  Array.from({ length: PER_PAGE }).map((_, i) => (
-                    <tr key={i}>
-                      {Array.from({ length: HEADER_COLS.length }).map(
-                        (_, j) => (
-                          <td key={j}>
-                            <div
-                              style={{
-                                height: "12px",
-                                background: "#e5e7eb",
-                                borderRadius: "4px",
-                                width: j === 2 ? "80%" : "60%",
-                              }}
-                            />
-                          </td>
-                        )
-                      )}
-                    </tr>
-                  ))
-                ) : laporan.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={HEADER_COLS.length}
-                      className="text-center py-10 text-gray-400 text-sm"
-                    >
-                      Tidak ada laporan ditemukan.
-                    </td>
-                  </tr>
-                ) : (
-                  laporan.map((item, i) => (
-                    <LaporanRow
-                      key={item.id}
-                      item={item}
-                      index={i}
-                      page={page}
-                      isSelected={selected?.id === item.id}
-                      onSelect={handleSelect}
-                      onStatusChange={updateStatus}
-                    />
-                  ))
-                )}
-              </tbody>
-            </table>
+              <input
+                type="text"
+                placeholder="Cari laporan..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+              />
+            </div>
+
+            <button type="button" className="btn--icon">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+              </svg>
+            </button>
           </div>
-
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            totalItems={totalItems}
-            onChangePage={setPage}
-            loading={loading}
-          />
         </div>
 
-        {selected && <DetailLaporan item={selected} />}
+        <div className="table-scroll">
+          <table className="report-table text-sm">
+            <thead>
+              <tr>
+                {HEADER_COLS.map((header) => (
+                  <th key={header}>{header}</th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {loading ? (
+                Array.from({ length: PER_PAGE }).map((_, i) => (
+                  <tr key={i}>
+                    {Array.from({ length: HEADER_COLS.length }).map((_, j) => (
+                      <td key={j}>
+                        <div
+                          style={{
+                            height: "12px",
+                            background: "#e5e7eb",
+                            borderRadius: "4px",
+                            width: j === 2 ? "80%" : "60%",
+                          }}
+                        />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : laporan.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={HEADER_COLS.length}
+                    className="py-10 text-center text-sm text-gray-400"
+                  >
+                    Tidak ada laporan ditemukan.
+                  </td>
+                </tr>
+              ) : (
+                laporan.map((item, i) => (
+                  <LaporanRow
+                    key={item.id}
+                    item={item}
+                    index={i}
+                    page={page}
+                    isSelected={selected?.id === item.id}
+                    onSelect={handleSelect}
+                    onStatusChange={updateStatus}
+                  />
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          onChangePage={setPage}
+          loading={loading}
+        />
       </div>
+
+      {selected && <DetailLaporan item={selected} />}
     </div>
   );
 }

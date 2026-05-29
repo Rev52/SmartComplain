@@ -3,19 +3,37 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import {
-  UserCheck,
-  Sparkles,
-  User,
-  Mail,
-  Phone,
-  Lock,
-  ShieldCheck,
   Eye,
   EyeOff,
+  Lock,
+  Mail,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  User,
+  UserCheck,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+
+const features = [
+  {
+    title: "Mudah Digunakan",
+    description: "Buat laporan fasilitas publik dengan cepat dan sederhana.",
+    icon: UserCheck,
+  },
+  {
+    title: "Transparan",
+    description: "Setiap perkembangan laporan dapat dipantau oleh pengguna.",
+    icon: Sparkles,
+  },
+  {
+    title: "Untuk Surabaya",
+    description: "Bantu kota menjadi lebih tertata dan responsif.",
+    icon: User,
+  },
+];
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -33,20 +51,20 @@ export default function RegisterPage() {
     confirmPassword: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
-  };
+    }));
+  }
 
-  const handleRegister = async (e: React.FormEvent) => {
+  async function handleRegister(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
-      setErrorMsg("Kata sandi dan ulangi sandi tidak cocok!");
+      setErrorMsg("Kata sandi dan konfirmasi sandi tidak cocok.");
       setLoading(false);
       return;
     }
@@ -58,8 +76,8 @@ export default function RegisterPage() {
       password: formData.password,
       options: {
         data: {
-          nama: formData.nama,
-          telepon: formData.telepon,
+          nama: formData.nama.trim(),
+          telepon: formData.telepon.trim(),
         },
       },
     });
@@ -73,9 +91,9 @@ export default function RegisterPage() {
     if (data.user) {
       const { error: profileError } = await supabase.from("profiles").upsert({
         id: data.user.id,
-        full_name: formData.nama,
+        full_name: formData.nama.trim(),
         email: formData.email.trim(),
-        phone: formData.telepon,
+        phone: formData.telepon.trim(),
         role: "user",
       });
 
@@ -91,264 +109,269 @@ export default function RegisterPage() {
     setLoading(false);
     router.replace("/login");
     router.refresh();
-  };
+  }
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col md:flex-row font-sans">
-      <div className="w-full md:w-1/2 bg-[#F8FAFC] px-10 py-8 lg:px-16 lg:py-10 flex flex-col h-screen overflow-hidden">
-        <div>
-          <div className="flex items-center justify-center mb-10">
+    <main className="min-h-screen bg-slate-100 font-sans text-slate-900">
+      <div className="grid min-h-screen lg:grid-cols-[0.95fr_1.05fr]">
+        <section className="hidden bg-white px-10 py-10 text-[#082b4c] lg:flex lg:flex-col lg:justify-between xl:px-16">
+          <div>
             <Image
               src="/LOGO2.png"
               alt="SmartComplain"
-              width={260}
+              width={240}
               height={90}
-              className="h-16 lg:h-[70px] w-auto object-contain"
+              className="h-16 w-auto object-contain"
               priority
             />
-          </div>
 
-          <h1 className="text-3xl lg:text-[34px] font-bold leading-[1.15] mb-10 max-w-md pr-8 text-[#0A2647]">
-            Platform Pengaduan Fasilitas Publik Modern Warga Surabaya
-          </h1>
+            <div className="mt-16 max-w-xl">
+              <p className="mb-4 inline-flex rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
+                SmartComplain Surabaya
+              </p>
 
-          <div className="space-y-5">
-            <div className="flex items-center gap-5">
-              <div className="w-[72px] h-[72px] bg-[#4B6B8A] rounded-2xl flex items-center justify-center shrink-0">
-                <UserCheck className="w-8 h-8 text-white" />
-              </div>
+              <h1 className="text-4xl font-bold leading-tight xl:text-5xl">
+                Daftar dan mulai laporkan fasilitas publik
+              </h1>
 
-              <div className="flex flex-col justify-center">
-                <h3 className="text-xl font-bold text-[#0A2647] mb-1">
-                  Mudah Digunakan
-                </h3>
-                <p className="text-sm text-slate-600 leading-snug">
-                  Laporkan keluhan hanya dalam
-                  <br />
-                  beberapa langkah sederhana.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-5">
-              <div className="w-[72px] h-[72px] bg-[#4B6B8A] rounded-2xl flex items-center justify-center shrink-0">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-
-              <div className="flex flex-col justify-center">
-                <h3 className="text-xl font-bold text-[#0A2647] mb-1">
-                  Transparan
-                </h3>
-                <p className="text-sm text-slate-600 leading-snug">
-                  Setiap laporan ditindaklanjuti secara
-                  <br />
-                  terbuka dan dapat dipantau warga.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-5">
-              <div className="w-[72px] h-[72px] bg-[#4B6B8A] rounded-2xl flex items-center justify-center shrink-0">
-                <User className="w-8 h-8 text-white" />
-              </div>
-
-              <div className="flex flex-col justify-center">
-                <h3 className="text-xl font-bold text-[#0A2647] mb-1">
-                  Untuk Surabaya
-                </h3>
-                <p className="text-sm text-slate-600 leading-snug">
-                  Bersama membangun Surabaya
-                  <br />
-                  yang lebih baik.
-                </p>
-              </div>
+              <p className="mt-5 max-w-md text-base leading-7 text-slate-600">
+                Buat akun untuk mengirim laporan, menambahkan lokasi, serta
+                memantau status pengaduan secara digital.
+              </p>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="w-full md:w-1/2 relative flex items-center justify-center p-4 lg:p-6 h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/background register.png"
-            alt="Background Surabaya"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </div>
+          <div className="grid gap-4">
+            {features.map((item) => {
+              const Icon = item.icon;
 
-        <div className="bg-[#0A2647] rounded-3xl p-6 lg:p-7 w-full max-w-[500px] z-10 shadow-2xl relative mt-0">
-          <h2 className="text-2xl font-bold text-white mb-1 text-center md:text-left">
-            Buat Akun Baru
-          </h2>
-
-          <p className="text-sm text-gray-300 mb-6 text-center md:text-left">
-            Lengkapi data dibawah ini untuk
-            <br className="hidden md:block" />
-            memulai !
-          </p>
-
-          {errorMsg && (
-            <div className="bg-red-500/10 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg text-sm mb-6 font-medium">
-              {errorMsg}
-            </div>
-          )}
-
-          <form
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3"
-            onSubmit={handleRegister}
-          >
-            <div className="space-y-2 col-span-1 md:col-span-2">
-              <label className="text-[15px] font-semibold text-gray-300 block">
-                Nama Lengkap
-              </label>
-
-              <input
-                type="text"
-                name="nama"
-                value={formData.nama}
-                onChange={handleChange}
-                placeholder="Masukkan nama"
-                className="w-full px-6 py-3 rounded-full bg-[#F3F4F6] text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm font-medium placeholder:text-slate-400 placeholder:font-normal"
-                required
-              />
-            </div>
-
-            <div className="space-y-2 col-span-1">
-              <label className="text-[15px] font-semibold text-gray-300 block">
-                Email
-              </label>
-
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-800" />
-                </div>
-
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Masukkan email"
-                  className="w-full pl-11 pr-4 py-3 rounded-full bg-[#F3F4F6] text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm font-medium placeholder:text-slate-400 placeholder:font-normal"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2 col-span-1">
-              <label className="text-[15px] font-semibold text-gray-300 block">
-                No. Telepon
-              </label>
-
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Phone className="h-5 w-5 text-slate-800" />
-                </div>
-
-                <input
-                  type="tel"
-                  name="telepon"
-                  value={formData.telepon}
-                  onChange={handleChange}
-                  placeholder="Masukkan No. Telp"
-                  className="w-full pl-11 pr-4 py-3 rounded-full bg-[#F3F4F6] text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm font-medium placeholder:text-slate-400 placeholder:font-normal"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2 col-span-1">
-              <label className="text-[15px] font-semibold text-gray-300 block">
-                Kata Sandi
-              </label>
-
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-800" />
-                </div>
-
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="••••••"
-                  className="w-full pl-11 pr-10 py-3 rounded-full bg-[#F3F4F6] text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm font-medium placeholder:text-slate-400 placeholder:font-normal tracking-widest"
-                  required
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-600 hover:text-slate-900 transition-colors"
+              return (
+                <div
+                  key={item.title}
+                  className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-[18px] w-[18px]" />
-                  ) : (
-                    <Eye className="h-[18px] w-[18px]" />
-                  )}
-                </button>
-              </div>
-            </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#082b4c]">
+                    <Icon className="h-6 w-6 text-white" />
+                  </div>
 
-            <div className="space-y-2 col-span-1">
-              <label className="text-[15px] font-semibold text-gray-300 block">
-                Ulangi Sandi
-              </label>
-
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <ShieldCheck className="h-5 w-5 text-slate-800" />
+                  <div>
+                    <h3 className="font-semibold text-[#082b4c]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-5 text-slate-600">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
+              );
+            })}
+          </div>
+        </section>
 
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="••••••"
-                  className="w-full pl-11 pr-10 py-3 rounded-full bg-[#F3F4F6] text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm font-medium placeholder:text-slate-400 placeholder:font-normal tracking-widest"
-                  required
+        <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
+          <div className="absolute inset-0">
+            <Image
+              src="/background register.png"
+              alt="Background Surabaya"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-slate-950/45" />
+          </div>
+
+          <div className="relative z-10 w-full max-w-2xl">
+            <div className="mb-6 flex justify-center lg:hidden">
+              <div className="rounded-2xl bg-white px-5 py-3 shadow-lg">
+                <Image
+                  src="/LOGO2.png"
+                  alt="SmartComplain"
+                  width={180}
+                  height={70}
+                  className="h-12 w-auto object-contain"
+                  priority
                 />
-
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-600 hover:text-slate-900 transition-colors"
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-[18px] w-[18px]" />
-                  ) : (
-                    <Eye className="h-[18px] w-[18px]" />
-                  )}
-                </button>
               </div>
             </div>
 
-            <div className="col-span-1 md:col-span-2 pt-6 flex justify-center">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-3/4 max-w-[240px] bg-white text-[#0A2647] font-bold text-base py-3 rounded-full shadow-sm transition-all duration-300 ease-in-out hover:bg-gray-100 hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+            <div className="rounded-3xl border border-white/10 bg-[#082b4c] p-6 shadow-2xl sm:p-8">
+              <div className="mb-7 text-center">
+                <p className="text-sm font-medium text-blue-200">
+                  Akun pengguna baru
+                </p>
+                <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
+                  Daftar SmartComplain
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  Lengkapi data berikut untuk mulai membuat laporan.
+                </p>
+              </div>
+
+              {errorMsg && (
+                <div className="mb-5 rounded-2xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-100">
+                  {errorMsg}
+                </div>
+              )}
+
+              <form
+                className="grid grid-cols-1 gap-5 sm:grid-cols-2"
+                onSubmit={handleRegister}
               >
-                {loading ? "Memproses..." : "Daftar Sekarang"}
-              </button>
-            </div>
-          </form>
+                <div className="sm:col-span-2">
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Nama Lengkap
+                  </label>
 
-          <div className="mt-8 text-center text-sm text-gray-300">
-            Sudah Memiliki Akun?{" "}
-            <Link
-              href="/login"
-              className="text-white font-bold hover:underline"
-            >
-              Login disini
-            </Link>
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type="text"
+                      name="nama"
+                      value={formData.nama}
+                      onChange={handleChange}
+                      placeholder="Masukkan nama lengkap"
+                      className="w-full rounded-2xl border border-transparent bg-white px-4 py-3.5 pl-12 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-400/20"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Email
+                  </label>
+
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Masukkan email"
+                      className="w-full rounded-2xl border border-transparent bg-white px-4 py-3.5 pl-12 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-400/20"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    No. Telepon
+                  </label>
+
+                  <div className="relative">
+                    <Phone className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type="tel"
+                      name="telepon"
+                      value={formData.telepon}
+                      onChange={handleChange}
+                      placeholder="Masukkan no. telepon"
+                      className="w-full rounded-2xl border border-transparent bg-white px-4 py-3.5 pl-12 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-400/20"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Kata Sandi
+                  </label>
+
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="Masukkan kata sandi"
+                      className="w-full rounded-2xl border border-transparent bg-white px-4 py-3.5 pl-12 pr-12 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-400/20"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-900"
+                      aria-label={
+                        showPassword
+                          ? "Sembunyikan kata sandi"
+                          : "Tampilkan kata sandi"
+                      }
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold text-slate-200">
+                    Konfirmasi Sandi
+                  </label>
+
+                  <div className="relative">
+                    <ShieldCheck className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      placeholder="Ulangi kata sandi"
+                      className="w-full rounded-2xl border border-transparent bg-white px-4 py-3.5 pl-12 pr-12 text-sm font-medium text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-400/20"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowConfirmPassword((prev) => !prev)
+                      }
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-900"
+                      aria-label={
+                        showConfirmPassword
+                          ? "Sembunyikan konfirmasi sandi"
+                          : "Tampilkan konfirmasi sandi"
+                      }
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-2xl bg-white px-5 py-3.5 text-sm font-bold text-[#082b4c] shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                  >
+                    {loading ? "Memproses..." : "Daftar Sekarang"}
+                  </button>
+                </div>
+              </form>
+
+              <p className="mt-7 text-center text-sm text-slate-300">
+                Sudah memiliki akun?{" "}
+                <Link
+                  href="/login"
+                  className="font-bold text-white hover:underline"
+                >
+                  Login di sini
+                </Link>
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

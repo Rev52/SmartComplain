@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
 
 type PageProps = {
   params: Promise<{
@@ -24,6 +25,13 @@ export default async function DetailLaporanAdminPage({ params }: PageProps) {
   return (
     <main className="admin-page">
       <div className="page-header">
+        <Link
+          href="/admin/laporan"
+          className="mb-2 text-sm font-medium text-blue-600 hover:underline"
+        >
+          ← Kembali ke daftar laporan
+        </Link>
+
         <h1 className="page-title">Detail Laporan</h1>
         <p className="page-subtitle">
           Informasi lengkap laporan dari pengguna.
@@ -41,12 +49,14 @@ export default async function DetailLaporanAdminPage({ params }: PageProps) {
           <div className="detail-grid">
             <div>
               <p className="detail-label">ID Laporan</p>
-              <p className="detail-value">{laporan.id}</p>
+              <p className="detail-value break-all">{laporan.id}</p>
             </div>
 
             <div>
               <p className="detail-label">Status</p>
-              <p className="detail-value">{laporan.status || "-"}</p>
+              <p className="detail-value capitalize">
+                {laporan.status || "-"}
+              </p>
             </div>
 
             <div>
@@ -56,7 +66,9 @@ export default async function DetailLaporanAdminPage({ params }: PageProps) {
 
             <div>
               <p className="detail-label">Prioritas</p>
-              <p className="detail-value">{laporan.prioritas || "-"}</p>
+              <p className="detail-value capitalize">
+                {laporan.prioritas || "-"}
+              </p>
             </div>
 
             <div>
@@ -74,9 +86,9 @@ export default async function DetailLaporanAdminPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div style={{ marginTop: "1.5rem" }}>
+          <div className="mt-6">
             <p className="detail-label">Deskripsi</p>
-            <p className="detail-value">
+            <p className="detail-value whitespace-pre-line">
               {laporan.deskripsi || laporan.description || "-"}
             </p>
           </div>

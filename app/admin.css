@@ -458,7 +458,6 @@
   border-bottom: none;
 }
 
-/* Tabel laporan (header biru, hover, selectable) */
 .report-table th {
   text-align: left;
   padding: 0.75rem 0.5rem;
@@ -904,4 +903,261 @@
 .loading-text {
   font-size: 0.875rem;
   color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE ADMIN FIX
+   ---------------------------------------------------------- */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.admin-shell,
+.admin-page {
+  width: 100%;
+  max-width: 100%;
+}
+
+.admin-page {
+  overflow-x: hidden;
+}
+
+.card,
+.card-blue-border,
+.stat-card {
+  min-width: 0;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 0.9fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.admin-dashboard-main,
+.admin-dashboard-side {
+  min-width: 0;
+}
+
+.admin-dashboard-side {
+  height: fit-content;
+}
+
+.stat-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll>table {
+  width: 100%;
+  min-width: 640px;
+}
+
+.report-table {
+  width: 100%;
+  min-width: 760px;
+}
+
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.detail-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.map-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card-header--responsive {
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .admin-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-px: 1rem;
+    --page-pt: 1rem;
+    --gap-card: 0.875rem;
+  }
+
+  .admin-page {
+    padding: var(--page-pt) var(--page-px);
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .card-header {
+    padding: 1rem;
+  }
+
+  .card-header--responsive {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .admin-toolbar {
+    width: 100%;
+  }
+
+  .search-wrap,
+  .search-input {
+    width: 100%;
+  }
+
+  .btn--icon {
+    flex: 0 0 auto;
+  }
+
+  .table-scroll {
+    padding: 0 1rem;
+  }
+
+  .table-scroll>table {
+    min-width: 520px;
+  }
+
+  .report-table {
+    min-width: 760px;
+  }
+
+  .pagination-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .pagination-btns {
+    flex-wrap: wrap;
+  }
+
+  .detail-layout {
+    flex-direction: column;
+  }
+
+  .detail-photo {
+    width: 100%;
+    height: 12rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .legend-bar {
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .map-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donut-inner,
+  .donut-inner svg {
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+}
+
+/* ----------------------------------------------------------
+   LEAFLET Z-INDEX FIX
+   ---------------------------------------------------------- */
+
+.leaflet-container {
+  z-index: 0 !important;
+}
+
+.leaflet-pane {
+  z-index: 1 !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 1 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 2 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 3 !important;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 4 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 5 !important;
+}
+
+.leaflet-control-container {
+  position: relative;
+  z-index: 10 !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 10 !important;
 }

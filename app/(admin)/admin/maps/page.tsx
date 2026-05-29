@@ -60,7 +60,8 @@ function MapStatCard({ label, value, icon }: MapStatCardProps) {
   return (
     <div className="stat-card">
       <div className="stat-icon stat-icon--blue">{icon}</div>
-      <div>
+
+      <div className="min-w-0">
         <p className="stat-label stat-label--blue">{label}</p>
         <p className="stat-value">{value}</p>
       </div>
@@ -142,72 +143,70 @@ export default function AdminMapsPage() {
   }, [laporan]);
 
   return (
-    <div className="admin-shell">
-      <div className="admin-page">
-        <div className="page-header">
-          <h1 className="page-title">Peta Selebaran Laporan</h1>
-          <p className="page-subtitle">
-            Visualisasi lokasi laporan yang masuk secara real-time.
-          </p>
-        </div>
+    <div className="admin-page">
+      <div className="page-header">
+        <h1 className="page-title">Peta Sebaran Laporan</h1>
+        <p className="page-subtitle">
+          Visualisasi lokasi laporan yang masuk secara real-time.
+        </p>
+      </div>
 
-        <div className="legend-bar">
-          <p className="legend-title">Prioritas:</p>
+      <div className="legend-bar">
+        <p className="legend-title">Prioritas:</p>
 
-          {PRIORITAS_LEGEND.map((item) => (
-            <div key={item.label} className="legend-item">
-              <div className={`legend-dot ${item.colorClass}`} />
-              <span className="legend-text">{item.label}</span>
-            </div>
-          ))}
-        </div>
+        {PRIORITAS_LEGEND.map((item) => (
+          <div key={item.label} className="legend-item">
+            <div className={`legend-dot ${item.colorClass}`} />
+            <span className="legend-text">{item.label}</span>
+          </div>
+        ))}
+      </div>
 
-        <div className="card card-body">
-          <LaporanMap laporan={laporan} loading={loading} />
-        </div>
+      <div className="card card-body">
+        <LaporanMap laporan={laporan} loading={loading} />
+      </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <MapStatCard
-            label="Total Marker"
-            value={loading ? "..." : laporan.length}
-            icon={
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#3b82f6"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            }
-          />
+      <div className="map-stat-grid">
+        <MapStatCard
+          label="Total Marker"
+          value={loading ? "..." : laporan.length}
+          icon={
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#3b82f6"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          }
+        />
 
-          <MapStatCard
-            label="Top Kecamatan"
-            value={loading ? "..." : topKecamatan}
-            icon={
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#3b82f6"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                <line x1="8" y1="2" x2="8" y2="18" />
-                <line x1="16" y1="6" x2="16" y2="22" />
-              </svg>
-            }
-          />
-        </div>
+        <MapStatCard
+          label="Top Kecamatan"
+          value={loading ? "..." : topKecamatan}
+          icon={
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#3b82f6"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+              <line x1="8" y1="2" x2="8" y2="18" />
+              <line x1="16" y1="6" x2="16" y2="22" />
+            </svg>
+          }
+        />
       </div>
     </div>
   );
