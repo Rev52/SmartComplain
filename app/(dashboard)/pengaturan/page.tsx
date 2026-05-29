@@ -159,10 +159,11 @@ export default function PengaturanPage() {
   }) => (
     <label className="flex items-center gap-3 cursor-pointer group">
       <div
-        className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${checked
-          ? "bg-[#124B8F] border-[#124B8F]"
-          : "bg-white border-slate-300 group-hover:border-[#124B8F]"
-          }`}
+        className={`w-5 h-5 rounded flex items-center justify-center border transition-colors ${
+          checked
+            ? "bg-[#124B8F] border-[#124B8F]"
+            : "bg-white border-slate-300 group-hover:border-[#124B8F]"
+        }`}
       >
         {checked && <Check className="w-3.5 h-3.5 text-white stroke-3" />}
       </div>
@@ -183,9 +184,7 @@ export default function PengaturanPage() {
   return (
     <div className="max-w-4xl relative z-10 -mt-2">
       <div className="mt-4 mb-8">
-        <h1 className="text-[32px] font-bold text-[#0A2647] mb-2">
-          {t.title}
-        </h1>
+        <h1 className="text-[32px] font-bold text-[#0A2647] mb-2">{t.title}</h1>
         <p className="text-slate-600 text-[15px]">{t.subtitle}</p>
       </div>
 

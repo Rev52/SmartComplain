@@ -3,13 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  Search,
-  Filter,
-  ChevronDown,
-  ChevronRight,
-  Plus,
-} from "lucide-react";
+import { Search, Filter, ChevronDown, ChevronRight, Plus } from "lucide-react";
 import { useLanguage } from "@/utils/languageStorage";
 import { createClient } from "@/lib/supabase/client";
 
@@ -156,8 +150,8 @@ export default function LaporanSayaPage() {
     activeTab === "Semua"
       ? daftarLaporan
       : daftarLaporan.filter(
-        (laporan) => normalizeStatus(laporan.status) === activeTab
-      );
+          (laporan) => normalizeStatus(laporan.status) === activeTab
+        );
 
   if (activeCategory !== "Semua Kategori") {
     filteredLaporan = filteredLaporan.filter(
@@ -236,10 +230,11 @@ export default function LaporanSayaPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 text-sm font-medium transition-colors relative ${activeTab === tab
-                ? "text-blue-600"
-                : "text-slate-500 hover:text-slate-700"
-                }`}
+              className={`pb-3 text-sm font-medium transition-colors relative ${
+                activeTab === tab
+                  ? "text-blue-600"
+                  : "text-slate-500 hover:text-slate-700"
+              }`}
             >
               {tabsMap[tab]}
 
@@ -295,10 +290,11 @@ export default function LaporanSayaPage() {
                       setActiveCategory(cat);
                       setShowFilterDropdown(false);
                     }}
-                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${activeCategory === cat
-                      ? "bg-blue-50 text-blue-700 font-semibold"
-                      : "text-slate-600 hover:bg-slate-50"
-                      }`}
+                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                      activeCategory === cat
+                        ? "bg-blue-50 text-blue-700 font-semibold"
+                        : "text-slate-600 hover:bg-slate-50"
+                    }`}
                   >
                     {cat}
                   </button>
@@ -390,10 +386,11 @@ export default function LaporanSayaPage() {
                 <button
                   key={pageNum}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-9 h-9 flex items-center justify-center rounded-lg font-medium shadow-sm transition-colors ${currentPage === pageNum
-                    ? "bg-[#124B8F] text-white"
-                    : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
-                    }`}
+                  className={`w-9 h-9 flex items-center justify-center rounded-lg font-medium shadow-sm transition-colors ${
+                    currentPage === pageNum
+                      ? "bg-[#124B8F] text-white"
+                      : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                  }`}
                 >
                   {pageNum}
                 </button>
@@ -401,9 +398,7 @@ export default function LaporanSayaPage() {
             })}
 
             <button
-              onClick={() =>
-                setCurrentPage((p) => Math.min(totalPages, p + 1))
-              }
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
               className="w-9 h-9 flex items-center justify-center bg-white border border-slate-200 rounded-lg text-slate-500 hover:bg-slate-50 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >

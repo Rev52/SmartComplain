@@ -105,7 +105,10 @@ export default function DetailLaporanPage({
           .maybeSingle();
 
         if (profileError) {
-          console.error("Gagal mengambil profil pelapor:", profileError.message);
+          console.error(
+            "Gagal mengambil profil pelapor:",
+            profileError.message
+          );
         } else {
           setProfile(profileData as ProfileRow | null);
         }
@@ -219,7 +222,8 @@ export default function DetailLaporanPage({
   const author = profile?.full_name || "Pengguna";
   const contact = profile?.phone || "-";
 
-  const handledBy = report.handled_by || report.handledBy || "Menunggu Verifikasi";
+  const handledBy =
+    report.handled_by || report.handledBy || "Menunggu Verifikasi";
 
   const reportImages =
     report.images ||

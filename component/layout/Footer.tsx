@@ -11,7 +11,14 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <div className="flex flex-col">
-              <Image src="/LOGO.png" alt="SmartComplain" width={240} height={80} className="h-16 w-auto object-contain" priority />
+              <Image
+                src="/LOGO.png"
+                alt="SmartComplain"
+                width={240}
+                height={80}
+                className="h-16 w-auto object-contain"
+                priority
+              />
             </div>
           </div>
           <p className="text-sm text-gray-300 pr-4">
@@ -26,11 +33,31 @@ export default function Footer() {
         <div>
           <h4 className="font-bold mb-4">Menu</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li><Link href="/" className="hover:text-white">Beranda</Link></li>
-            <li><Link href="#tentang" className="hover:text-white">Tentang</Link></li>
-            <li><Link href="#fitur" className="hover:text-white">Fitur</Link></li>
-            <li><Link href="#cara-kerja" className="hover:text-white">Cara Kerja</Link></li>
-            <li><Link href="/laporan" className="hover:text-white">Laporan</Link></li>
+            <li>
+              <Link href="/" className="hover:text-white">
+                Beranda
+              </Link>
+            </li>
+            <li>
+              <Link href="#tentang" className="hover:text-white">
+                Tentang
+              </Link>
+            </li>
+            <li>
+              <Link href="#fitur" className="hover:text-white">
+                Fitur
+              </Link>
+            </li>
+            <li>
+              <Link href="#cara-kerja" className="hover:text-white">
+                Cara Kerja
+              </Link>
+            </li>
+            <li>
+              <Link href="/laporan" className="hover:text-white">
+                Laporan
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -38,10 +65,26 @@ export default function Footer() {
         <div>
           <h4 className="font-bold mb-4">Tautan Cepat</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li><Link href="/laporan/buat" className="hover:text-white">Buat Laporan</Link></li>
-            <li><Link href="/cek-status" className="hover:text-white">Cek Status</Link></li>
-            <li><Link href="/peta" className="hover:text-white">Peta Lokasi</Link></li>
-            <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
+            <li>
+              <Link href="/laporan/buat" className="hover:text-white">
+                Buat Laporan
+              </Link>
+            </li>
+            <li>
+              <Link href="/cek-status" className="hover:text-white">
+                Cek Status
+              </Link>
+            </li>
+            <li>
+              <Link href="/peta" className="hover:text-white">
+                Peta Lokasi
+              </Link>
+            </li>
+            <li>
+              <Link href="/faq" className="hover:text-white">
+                FAQ
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -60,10 +103,18 @@ export default function Footer() {
             </li>
           </ul>
           <div className="flex gap-4 mt-6">
-            <Link href="#" className="hover:text-blue-400"><FaInstagram className="w-5 h-5" /></Link>
-            <Link href="#" className="hover:text-blue-400"><FaTwitter className="w-5 h-5" /></Link>
-            <Link href="#" className="hover:text-blue-400"><FaFacebook className="w-5 h-5" /></Link>
-            <Link href="#" className="hover:text-blue-400"><FaYoutube className="w-5 h-5" /></Link>
+            <Link href="#" className="hover:text-blue-400">
+              <FaInstagram className="w-5 h-5" />
+            </Link>
+            <Link href="#" className="hover:text-blue-400">
+              <FaTwitter className="w-5 h-5" />
+            </Link>
+            <Link href="#" className="hover:text-blue-400">
+              <FaFacebook className="w-5 h-5" />
+            </Link>
+            <Link href="#" className="hover:text-blue-400">
+              <FaYoutube className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </div>

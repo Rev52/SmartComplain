@@ -242,9 +242,7 @@ export default function BerandaPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white/95 rounded-2xl shadow-sm border border-slate-100 p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="font-bold text-[#0A2647]">
-              {t.beranda.terbaru}
-            </h3>
+            <h3 className="font-bold text-[#0A2647]">{t.beranda.terbaru}</h3>
 
             <Link
               href="/laporan"
@@ -312,9 +310,7 @@ export default function BerandaPage() {
 
         <div className="bg-white/95 rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="font-bold text-[#0A2647]">
-              {t.beranda.statistik}
-            </h3>
+            <h3 className="font-bold text-[#0A2647]">{t.beranda.statistik}</h3>
 
             <Link
               href="/laporan"

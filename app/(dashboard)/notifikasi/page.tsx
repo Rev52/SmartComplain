@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Check,
-  Clock,
-  Send,
-  X,
-  Megaphone,
-} from "lucide-react";
+import { Check, Clock, Send, X, Megaphone } from "lucide-react";
 import { useLanguage } from "@/utils/languageStorage";
 import { createClient } from "@/lib/supabase/client";
 
@@ -77,7 +71,9 @@ export default function NotifikasiPage() {
 
       const { data, error } = await supabase
         .from("laporan")
-        .select("id, judul, status, created_at, updated_at, handled_by, user_id")
+        .select(
+          "id, judul, status, created_at, updated_at, handled_by, user_id"
+        )
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
@@ -123,9 +119,7 @@ export default function NotifikasiPage() {
           title: (
             <>
               Laporan{" "}
-              <span className="text-blue-500 font-semibold">
-                #{laporan.id}
-              </span>{" "}
+              <span className="text-blue-500 font-semibold">#{laporan.id}</span>{" "}
               {titleSuffix}
             </>
           ),
@@ -181,10 +175,7 @@ export default function NotifikasiPage() {
       case "sistem":
         return {
           icon: (
-            <Megaphone
-              className="w-6 h-6 text-[#1E40AF]"
-              fill="currentColor"
-            />
+            <Megaphone className="w-6 h-6 text-[#1E40AF]" fill="currentColor" />
           ),
           bg: "bg-[#E0E7FF]",
         };
@@ -238,8 +229,9 @@ export default function NotifikasiPage() {
             return (
               <div
                 key={notif.id}
-                className={`flex items-start md:items-center gap-4 md:gap-5 p-4 md:p-6 border-b border-slate-200 last:border-b-0 hover:bg-slate-50 transition-colors cursor-pointer ${isUnread ? "bg-white" : "bg-transparent"
-                  }`}
+                className={`flex items-start md:items-center gap-4 md:gap-5 p-4 md:p-6 border-b border-slate-200 last:border-b-0 hover:bg-slate-50 transition-colors cursor-pointer ${
+                  isUnread ? "bg-white" : "bg-transparent"
+                }`}
               >
                 <div
                   className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center shrink-0 ${style.bg}`}

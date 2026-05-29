@@ -7,11 +7,11 @@ export const dictionary = {
       faq: "Bantuan & FAQ",
       profil: "Profil Saya",
       pengaturan: "Pengaturan",
-      keluar: "Keluar"
+      keluar: "Keluar",
     },
     topbar: {
       welcome: "Selamat Datang, {name}!",
-      summary: "Berikut ringkasan aktivitas dan laporan Anda hari ini."
+      summary: "Berikut ringkasan aktivitas dan laporan Anda hari ini.",
     },
     beranda: {
       total: "Total Laporan",
@@ -27,10 +27,12 @@ export const dictionary = {
       statistik: "Statistik Laporan",
       lihatDetail: "Lihat Detail",
       bannerTitle: "Laporkan dengan Mudah dan Cepat",
-      bannerDesc: "Bantu wujudkan Surabaya yang lebih nyaman, aman, dan responsif. Setiap laporan Anda sangat berarti!",
+      bannerDesc:
+        "Bantu wujudkan Surabaya yang lebih nyaman, aman, dan responsif. Setiap laporan Anda sangat berarti!",
       btnBuat: "Buat Laporan Baru",
       tipsTitle: "Tips Melaporkan",
-      tipsDesc: "Pastikan laporan Anda disertai foto, lokasi, dan deskripsi yang jelas agar lebih cepat ditindaklanjuti"
+      tipsDesc:
+        "Pastikan laporan Anda disertai foto, lokasi, dan deskripsi yang jelas agar lebih cepat ditindaklanjuti",
     },
     buat: {
       title: "Buat Laporan Pengaduan",
@@ -41,7 +43,8 @@ export const dictionary = {
       placeholderLokasi: "Masukkan alamat lengkap",
       btnLokasi: "Gunakan Lokasi Saat Ini",
       deskripsi: "Deskripsi Laporan",
-      placeholderDesc: "Jelaskan permasalahan yang Anda temui secara detail....",
+      placeholderDesc:
+        "Jelaskan permasalahan yang Anda temui secara detail....",
       minChar: "Minimal 10 karakter",
       foto: "Foto Bukti",
       maksFoto: "(Maks. 5 foto)",
@@ -52,7 +55,7 @@ export const dictionary = {
       kirim: "Kirim Laporan",
       alertSukses: "Laporan Anda telah berhasil dibuat.",
       alertLengkap: "Harap lengkapi semua data dengan benar!",
-      alertMaks: "Maksimal 5 foto!"
+      alertMaks: "Maksimal 5 foto!",
     },
     laporan: {
       title: "Laporan Saya",
@@ -64,7 +67,7 @@ export const dictionary = {
       tabDitolak: "Ditolak",
       cari: "Cari laporan...",
       filter: "Filter",
-      belumAda: "Belum ada laporan dengan status {status}"
+      belumAda: "Belum ada laporan dengan status {status}",
     },
     detail: {
       memuat: "Memuat laporan...",
@@ -80,8 +83,9 @@ export const dictionary = {
       foto: "Foto Bukti",
       riwayat: "Riwayat Laporan",
       tambahInfoTitle: "Ada informasi tambahan?",
-      tambahInfoDesc: "Tambahkan informasi baru untuk membantu proses penanganan laporan",
-      btnTambah: "Tambah Informasi"
+      tambahInfoDesc:
+        "Tambahkan informasi baru untuk membantu proses penanganan laporan",
+      btnTambah: "Tambah Informasi",
     },
     faq: {
       title: "Pertanyaan yang Sering Diajukan",
@@ -89,25 +93,30 @@ export const dictionary = {
       items: [
         {
           question: "Bagaimana cara membuat laporan baru?",
-          answer: 'Anda dapat membuat laporan baru dengan login ke akun SmartComplain, klik tombol "Buat Laporan", isi detail laporan dengan lengkap, unggah foto atau bukti pendukung (jika ada), lalu klik "Kirim Laporan".'
+          answer:
+            'Anda dapat membuat laporan baru dengan login ke akun SmartComplain, klik tombol "Buat Laporan", isi detail laporan dengan lengkap, unggah foto atau bukti pendukung (jika ada), lalu klik "Kirim Laporan".',
         },
         {
           question: "Berapa lama laporan saya akan diproses?",
-          answer: "Waktu proses laporan tergantung pada jenis dan tingkat prioritas laporan. Kami akan berusaha menindaklanjuti laporan secepat mungkin dan memberikan pembaruan secara berkala di akun Anda."
+          answer:
+            "Waktu proses laporan tergantung pada jenis dan tingkat prioritas laporan. Kami akan berusaha menindaklanjuti laporan secepat mungkin dan memberikan pembaruan secara berkala di akun Anda.",
         },
         {
           question: "Bagaimana cara mengetahui perkembangan laporan?",
-          answer: 'Anda dapat memantau perkembangan laporan melalui menu "Riwayat Laporan". Setiap laporan memiliki status seperti Menunggu Verifikasi, Diproses, atau Selesai.'
+          answer:
+            'Anda dapat memantau perkembangan laporan melalui menu "Riwayat Laporan". Setiap laporan memiliki status seperti Menunggu Verifikasi, Diproses, atau Selesai.',
         },
         {
           question: "Apa yang harus dilakukan jika laporan saya ditolak?",
-          answer: "Jika laporan ditolak, Anda dapat melihat alasan penolakan pada detail laporan. Pastikan laporan Anda memenuhi ketentuan dan coba buat laporan kembali dengan informasi yang lebih lengkap."
+          answer:
+            "Jika laporan ditolak, Anda dapat melihat alasan penolakan pada detail laporan. Pastikan laporan Anda memenuhi ketentuan dan coba buat laporan kembali dengan informasi yang lebih lengkap.",
         },
         {
           question: "Bagaimana cara mengubah data profil saya?",
-          answer: 'Anda dapat mengubah data profil dengan masuk ke menu "Profil" di dashboard, klik "Edit Profil", lalu perbarui informasi yang diinginkan. Jangan lupa klik "Simpan" untuk menyimpan perubahan.'
-        }
-      ]
+          answer:
+            'Anda dapat mengubah data profil dengan masuk ke menu "Profil" di dashboard, klik "Edit Profil", lalu perbarui informasi yang diinginkan. Jangan lupa klik "Simpan" untuk menyimpan perubahan.',
+        },
+      ],
     },
     bantuan: {
       title: "Bantuan",
@@ -138,7 +147,7 @@ export const dictionary = {
       faqLink: "Lihat Jawaban",
       hubungiTitle: "Hubungi Kami",
       alamat: "Alamat",
-      alamatDesc: "Jl. Ngawi Kulon No. 23 Ngawi, Surabaya"
+      alamatDesc: "Jl. Ngawi Kulon No. 23 Ngawi, Surabaya",
     },
     notifikasi: {
       title: "Notifikasi",
@@ -149,8 +158,8 @@ export const dictionary = {
         selesai: "telah selesai",
         diterima: "telah diterima",
         ditolak: "ditolak",
-        sistem: "Pemeliharaan sistem"
-      }
+        sistem: "Pemeliharaan sistem",
+      },
     },
     profil: {
       title: "Profil Saya",
@@ -164,9 +173,10 @@ export const dictionary = {
       alamat: "Alamat",
       simpan: "Simpan Perubahan",
       ubahPasswordTitle: "Ubah Password",
-      ubahPasswordDesc: "Perbarui password Anda secara berkala untuk menjaga keamanan akun.",
+      ubahPasswordDesc:
+        "Perbarui password Anda secara berkala untuk menjaga keamanan akun.",
       btnUbahPassword: "Ubah Password",
-      alertSukses: "Profil berhasil diperbarui!"
+      alertSukses: "Profil berhasil diperbarui!",
     },
     pengaturan: {
       title: "Pengaturan",
@@ -180,8 +190,8 @@ export const dictionary = {
       secBtn: "Ubah Password",
       aboutTitle: "Tentang",
       aboutDesc: "Informasi tentang SmartComplain.",
-      version: "Versi 1.0.0"
-    }
+      version: "Versi 1.0.0",
+    },
   },
   en: {
     sidebar: {
@@ -191,11 +201,11 @@ export const dictionary = {
       faq: "Help & FAQ",
       profil: "My Profile",
       pengaturan: "Settings",
-      keluar: "Sign Out"
+      keluar: "Sign Out",
     },
     topbar: {
       welcome: "Welcome, {name}!",
-      summary: "Here is the summary of your activities and reports today."
+      summary: "Here is the summary of your activities and reports today.",
     },
     beranda: {
       total: "Total Reports",
@@ -211,10 +221,12 @@ export const dictionary = {
       statistik: "Report Statistics",
       lihatDetail: "View Details",
       bannerTitle: "Report Easily and Quickly",
-      bannerDesc: "Help make Surabaya more comfortable, safe, and responsive. Every report matters!",
+      bannerDesc:
+        "Help make Surabaya more comfortable, safe, and responsive. Every report matters!",
       btnBuat: "Create New Report",
       tipsTitle: "Reporting Tips",
-      tipsDesc: "Ensure your report includes clear photos, location, and description for faster processing"
+      tipsDesc:
+        "Ensure your report includes clear photos, location, and description for faster processing",
     },
     buat: {
       title: "Create Complaint Report",
@@ -236,7 +248,7 @@ export const dictionary = {
       kirim: "Submit Report",
       alertSukses: "Your report has been successfully created.",
       alertLengkap: "Please complete all fields correctly!",
-      alertMaks: "Maximum 5 photos!"
+      alertMaks: "Maximum 5 photos!",
     },
     laporan: {
       title: "My Reports",
@@ -248,7 +260,7 @@ export const dictionary = {
       tabDitolak: "Rejected",
       cari: "Search reports...",
       filter: "Filter",
-      belumAda: "No reports found with status {status}"
+      belumAda: "No reports found with status {status}",
     },
     detail: {
       memuat: "Loading report...",
@@ -265,7 +277,7 @@ export const dictionary = {
       riwayat: "Report History",
       tambahInfoTitle: "Any additional information?",
       tambahInfoDesc: "Add new information to help process the report",
-      btnTambah: "Add Information"
+      btnTambah: "Add Information",
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -273,25 +285,30 @@ export const dictionary = {
       items: [
         {
           question: "How do I create a new report?",
-          answer: 'You can create a new report by logging into your SmartComplain account, clicking the "Create Report" button, filling out the report details completely, uploading photos or supporting evidence (if any), and then clicking "Submit Report".'
+          answer:
+            'You can create a new report by logging into your SmartComplain account, clicking the "Create Report" button, filling out the report details completely, uploading photos or supporting evidence (if any), and then clicking "Submit Report".',
         },
         {
           question: "How long will my report be processed?",
-          answer: "The processing time depends on the type and priority level of the report. We will strive to follow up on reports as quickly as possible and provide regular updates on your account."
+          answer:
+            "The processing time depends on the type and priority level of the report. We will strive to follow up on reports as quickly as possible and provide regular updates on your account.",
         },
         {
           question: "How do I track the progress of my report?",
-          answer: 'You can monitor the progress of your report through the "Report History" menu. Each report has a status such as Pending Verification, In Progress, or Completed.'
+          answer:
+            'You can monitor the progress of your report through the "Report History" menu. Each report has a status such as Pending Verification, In Progress, or Completed.',
         },
         {
           question: "What should I do if my report is rejected?",
-          answer: "If a report is rejected, you can see the reason for rejection in the report details. Make sure your report meets the requirements and try creating a new report with more complete information."
+          answer:
+            "If a report is rejected, you can see the reason for rejection in the report details. Make sure your report meets the requirements and try creating a new report with more complete information.",
         },
         {
           question: "How do I change my profile data?",
-          answer: 'You can change your profile data by going to the "Profile" menu on the dashboard, clicking "Edit Profile", and updating the desired information. Do not forget to click "Save" to apply the changes.'
-        }
-      ]
+          answer:
+            'You can change your profile data by going to the "Profile" menu on the dashboard, clicking "Edit Profile", and updating the desired information. Do not forget to click "Save" to apply the changes.',
+        },
+      ],
     },
     bantuan: {
       title: "Help",
@@ -322,7 +339,7 @@ export const dictionary = {
       faqLink: "View Answers",
       hubungiTitle: "Contact Us",
       alamat: "Address",
-      alamatDesc: "Jl. Ngawi Kulon No. 23 Ngawi, Surabaya"
+      alamatDesc: "Jl. Ngawi Kulon No. 23 Ngawi, Surabaya",
     },
     notifikasi: {
       title: "Notifications",
@@ -333,8 +350,8 @@ export const dictionary = {
         selesai: "has been completed",
         diterima: "has been received",
         ditolak: "is rejected",
-        sistem: "System maintenance"
-      }
+        sistem: "System maintenance",
+      },
     },
     profil: {
       title: "My Profile",
@@ -348,9 +365,10 @@ export const dictionary = {
       alamat: "Address",
       simpan: "Save Changes",
       ubahPasswordTitle: "Change Password",
-      ubahPasswordDesc: "Update your password regularly to maintain account security.",
+      ubahPasswordDesc:
+        "Update your password regularly to maintain account security.",
       btnUbahPassword: "Change Password",
-      alertSukses: "Profile updated successfully!"
+      alertSukses: "Profile updated successfully!",
     },
     pengaturan: {
       title: "Settings",
@@ -364,9 +382,9 @@ export const dictionary = {
       secBtn: "Change Password",
       aboutTitle: "About",
       aboutDesc: "Information about SmartComplain.",
-      version: "Version 1.0.0"
-    }
-  }
+      version: "Version 1.0.0",
+    },
+  },
 };
 
 export type DictionaryType = typeof dictionary.id;

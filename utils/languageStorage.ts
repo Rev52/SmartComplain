@@ -24,7 +24,6 @@ export const useLanguage = () => {
   const [language, setLanguageState] = useState<Language>("id");
 
   useEffect(() => {
-    // Initial load
     setLanguageState(getGlobalLanguage());
 
     const handleLanguageChange = (e: Event) => {

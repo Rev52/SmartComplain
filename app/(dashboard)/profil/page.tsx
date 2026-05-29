@@ -375,10 +375,11 @@ export default function ProfilSayaPage() {
       </div>
 
       <div
-        className={`fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex items-center gap-3 bg-[#124B8F] text-white px-5 py-4 rounded-xl shadow-lg border border-blue-800 transition-all duration-300 transform ${showToast
-          ? "translate-y-0 opacity-100"
-          : "translate-y-8 opacity-0 pointer-events-none"
-          }`}
+        className={`fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex items-center gap-3 bg-[#124B8F] text-white px-5 py-4 rounded-xl shadow-lg border border-blue-800 transition-all duration-300 transform ${
+          showToast
+            ? "translate-y-0 opacity-100"
+            : "translate-y-8 opacity-0 pointer-events-none"
+        }`}
       >
         <CheckCircle2 className="w-6 h-6 text-green-400" />
         <div>

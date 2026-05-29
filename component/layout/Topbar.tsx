@@ -71,9 +71,7 @@ export default function Topbar() {
           {t.topbar.welcome.replace("{name}", displayName)}
         </h1>
 
-        <p className="text-slate-600 text-xs md:text-sm">
-          {t.topbar.summary}
-        </p>
+        <p className="text-slate-600 text-xs md:text-sm">{t.topbar.summary}</p>
       </div>
 
       <div className="flex items-center justify-between md:justify-end gap-5 w-full md:w-auto mt-2 md:mt-0">

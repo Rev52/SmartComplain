@@ -193,8 +193,9 @@ export default function BuatLaporanPage() {
         fotos.map((foto) => fileToBase64(foto))
       );
 
-      const title = `${kategori} di ${lokasi.split(",")[0] || "Lokasi tidak diketahui"
-        }`;
+      const title = `${kategori} di ${
+        lokasi.split(",")[0] || "Lokasi tidak diketahui"
+      }`;
 
       const { error } = await supabase.from("laporan").insert({
         user_id: user.id,
@@ -270,8 +271,9 @@ export default function BuatLaporanPage() {
 
               <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                 <ChevronDown
-                  className={`h-5 w-5 text-slate-500 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-slate-500 transition-transform duration-200 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
                 />
               </div>
             </div>
@@ -285,10 +287,11 @@ export default function BuatLaporanPage() {
                       setKategori(option);
                       setIsDropdownOpen(false);
                     }}
-                    className={`px-5 py-3.5 mx-2 rounded-lg cursor-pointer text-sm font-bold transition-colors ${kategori === option
+                    className={`px-5 py-3.5 mx-2 rounded-lg cursor-pointer text-sm font-bold transition-colors ${
+                      kategori === option
                         ? "bg-[#E3EFFF] text-[#3B82F6]"
                         : "text-[#0A2647] hover:bg-slate-200"
-                      }`}
+                    }`}
                   >
                     {option}
                   </div>
@@ -394,14 +397,16 @@ export default function BuatLaporanPage() {
             {fotos.length < 5 && (
               <label
                 htmlFor="upload-foto"
-                className={`flex flex-col items-center justify-center cursor-pointer transition-colors group ${fotos.length > 0
+                className={`flex flex-col items-center justify-center cursor-pointer transition-colors group ${
+                  fotos.length > 0
                     ? "w-24 h-24 bg-white/80 border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-xl"
                     : "w-full bg-white/80 backdrop-blur-sm border-2 border-dashed border-slate-300 hover:border-blue-400 rounded-2xl py-12"
-                  }`}
+                }`}
               >
                 <div
-                  className={`${fotos.length > 0 ? "w-8 h-8 mb-1" : "w-12 h-12 mb-3"
-                    } bg-blue-50 text-[#124B8F] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}
+                  className={`${
+                    fotos.length > 0 ? "w-8 h-8 mb-1" : "w-12 h-12 mb-3"
+                  } bg-blue-50 text-[#124B8F] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}
                 >
                   <CloudUpload
                     className={fotos.length > 0 ? "w-4 h-4" : "w-6 h-6"}
@@ -456,10 +461,11 @@ export default function BuatLaporanPage() {
       </form>
 
       <div
-        className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-[#124B8F] text-white px-5 py-4 rounded-xl shadow-lg border border-blue-800 transition-all duration-300 transform ${showToast
+        className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-[#124B8F] text-white px-5 py-4 rounded-xl shadow-lg border border-blue-800 transition-all duration-300 transform ${
+          showToast
             ? "translate-y-0 opacity-100"
             : "translate-y-8 opacity-0 pointer-events-none"
-          }`}
+        }`}
       >
         <CheckCircle2 className="w-6 h-6 text-green-400" />
         <div>

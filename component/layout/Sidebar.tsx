@@ -64,8 +64,9 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } md:sticky md:top-0 md:translate-x-0 transition-transform duration-300 ease-in-out w-[260px] shrink-0 bg-[#0A2647] text-white flex flex-col h-screen z-50`}
+        className={`fixed inset-y-0 left-0 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:sticky md:top-0 md:translate-x-0 transition-transform duration-300 ease-in-out w-[260px] shrink-0 bg-[#0A2647] text-white flex flex-col h-screen z-50`}
       >
         <div className="p-6 flex items-center gap-3 mb-4">
           <div className="flex flex-col">
@@ -90,10 +91,11 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${isActive
-                  ? "bg-[#1C4E8A] text-white"
-                  : "text-gray-300 hover:text-white hover:bg-white/10"
-                  }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
+                  isActive
+                    ? "bg-[#1C4E8A] text-white"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                }`}
               >
                 <Icon className="w-5 h-5" />
                 {item.name}
