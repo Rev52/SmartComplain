@@ -1,8 +1,8 @@
 import Navbar from "@/component/layout/Navbar";
 import Footer from "@/component/layout/Footer";
-import { 
-  MousePointerClick, Search, Sparkles, 
-  Cpu, CheckSquare, MapPin, 
+import {
+  MousePointerClick, Search, Sparkles,
+  Cpu, CheckSquare, MapPin,
   FileEdit, CloudUpload, RefreshCw, CheckCircle,
   MessageSquare, Clock, Users
 } from "lucide-react";
@@ -18,15 +18,15 @@ export default function LandingPage() {
       <section className="relative w-full h-[600px] flex flex-col items-center justify-center pt-20 px-8">
         {/* Background Image (Pastikan ada hero-bg.jpg di folder public) */}
         <div className="absolute inset-0 z-0 bg-blue-100">
-          <Image 
-            src="/Landingpage Background.png" 
-            alt="Surabaya Tugu Pahlawan" 
+          <Image
+            src="/Landingpage Background.png"
+            alt="Surabaya Tugu Pahlawan"
             fill
             className="object-cover opacity-80"
             priority
           />
           {/* Overlay gradient untuk teks */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-white/90 to-transparent"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl w-full">
@@ -88,12 +88,12 @@ export default function LandingPage() {
           </Link>
         </div>
         <div className="relative h-[500px] bg-slate-100 rounded-2xl flex items-center justify-center">
-           {/* Mockup Placeholder (Ganti dengan file mockup-app.png di public) */}
-           <Image 
-            src="/landingpage image2.png" 
-            alt="Mobile App Mockup" 
-            width={600} 
-            height={600} 
+          {/* Mockup Placeholder (Ganti dengan file mockup-app.png di public) */}
+          <Image
+            src="/landingpage image2.png"
+            alt="Mobile App Mockup"
+            width={600}
+            height={600}
             className="object-contain drop-shadow-2xl z-10"
           />
         </div>
@@ -149,7 +149,7 @@ export default function LandingPage() {
       <section id="cara-kerja" className="max-w-7xl mx-auto px-8 py-16 mb-16">
         <h4 className="text-blue-600 font-bold text-sm mb-2 uppercase">Cara Kerja</h4>
         <h2 className="text-3xl font-bold text-[#0A2647] mb-12">Laporkan dalam 4 Langkah Mudah</h2>
-        
+
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative">
           {/* Step 1 */}
           <div className="flex flex-col items-center text-center w-40 shrink-0 z-10 bg-slate-50">
@@ -197,7 +197,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <h4 className="text-blue-200 font-bold text-xs mb-1 uppercase tracking-wider">Data Laporan</h4>
           <h2 className="text-2xl font-bold text-white mb-8">Bersama Warga, Wujudkan Perubahan</h2>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {/* Stat 1 */}
             <div className="bg-[#4285F4] rounded-lg p-4 flex items-center gap-4 text-white">
