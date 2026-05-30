@@ -690,15 +690,25 @@
 
 .status-select {
   font-size: 0.75rem;
-  border: 1px solid var(--color-border-mid);
+  font-weight: 600;
+  color: #1e293b;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
   border-radius: 0.375rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.375rem 0.5rem;
   outline: none;
-  transition: box-shadow 0.1s;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.status-select:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
 }
 
 .status-select:focus {
-  box-shadow: 0 0 0 1px var(--color-primary-soft);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
 }
 
 /* ----------------------------------------------------------

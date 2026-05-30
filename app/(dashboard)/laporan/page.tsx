@@ -230,7 +230,7 @@ export default function LaporanSayaPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-3 text-sm font-medium transition-colors relative ${
+              className={`pb-1 text-sm font-medium transition-colors relative ${
                 activeTab === tab
                   ? "text-blue-600"
                   : "text-slate-500 hover:text-slate-700"
@@ -239,7 +239,7 @@ export default function LaporanSayaPage() {
               {tabsMap[tab]}
 
               {activeTab === tab && (
-                <span className="absolute bottom--1px left-0 w-full h-[2px] bg-blue-600 rounded-t-full" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-600 rounded-t-full" />
               )}
             </button>
           ))}

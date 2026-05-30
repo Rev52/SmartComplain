@@ -315,7 +315,7 @@ export default function AdminLaporanPage() {
   foto_url,
   handled_by,
   handled_at,
-  profiles (
+  profiles!user_id (
     full_name,
     email,
     phone
