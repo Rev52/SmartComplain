@@ -55,7 +55,7 @@ export default function ClientDashboardLayout({
     <div className="flex min-h-screen bg-slate-50 font-sans">
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
-      <main className="flex-1 relative w-full flex flex-col min-w-0">
+      <main className="flex-1 relative w-full flex flex-col min-w-0 md:pl-[260px]">
         <DynamicBackground />
 
         <MobileHeader onMenuClick={() => setIsSidebarOpen(true)} />
